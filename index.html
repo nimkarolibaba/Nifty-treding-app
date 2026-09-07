@@ -3,16 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nifty Trading App</title>
+  <title>NIFTY Trading Analysis</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f6f9;
+      color: #222;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      margin-top: 15px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .status {
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .buy {
+      color: green;
+    }
+
+    .sell {
+      color: red;
+    }
+
+    .neutral {
+      color: orange;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>Nifty Trading App</h1>
-  <h2>Intraday Trading Analysis</h2>
+<header>
+  <h1>NIFTY Trading App</h1>
+  <p>Intraday Analysis Dashboard</p>
+</header>
 
-  <p>Welcome to my Nifty trading analysis app.</p>
+<div class="container">
 
-  <button>Analyze NIFTY</button>
+  <div class="card">
+    <h2>NIFTY Analysis</h2>
+
+    <div class="row">
+      <span>5 EMA</span>
+      <b id="ema5">Waiting...</b>
+    </div>
+
+    <div class="row">
+      <span>10 EMA</span>
+      <b id="ema10">Waiting...</b>
+    </div>
+
+    <div class="row">
+      <span>VWAP</span>
+      <b id="vwap">Waiting...</b>
+    </div>
+
+    <div class="row">
+      <span>Volume</span>
+      <b id="volume">Waiting...</b>
+    </div>
+
+    <div id="signal" class="status neutral">
+      WAITING FOR ANALYSIS
+    </div>
+
+    <button onclick="analyzeNifty()">
+      Analyze NIFTY
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>Trading Rules</h3>
+    <p>BUY: 5 EMA > 10 EMA + Price Above VWAP + High Volume</p>
+    <p>SELL: 5 EMA < 10 EMA + Price Below VWAP + High Volume</p>
+    <p>Always use Stop Loss ⚠️</p>
+  </div>
+
+</div>
+
+<script>
+  function analyzeNifty() {
+
+    document.getElementById("ema5").innerText = "Checking...";
+    document.getElementById("ema10").innerText = "Checking...";
+    document.getElementById("vwap").innerText = "Checking...";
+    document.getElementById("volume").innerText = "Checking...";
+
+    setTimeout(() => {
+
+      document.getElementById("ema5").innerText = "Ready";
+      document.getElementById("ema10").innerText = "Ready";
+      document.getElementById("vwap").innerText = "Ready";
+      document.getElementById("volume").innerText = "Ready";
+
+      const signal = document.getElementById("signal");
+      signal.innerText = "CONNECT LIVE API";
+      signal.className = "status neutral";
+
+    }, 1000);
+  }
+</script>
 
 </body>
 </html>
